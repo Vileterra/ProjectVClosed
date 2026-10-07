@@ -274,3 +274,25 @@ Report:
 * which roadmap item should be handled next
 
 Then wait for the next task.
+
+---
+
+# 16. UI style and translation maintenance
+
+For player-facing UI changes, follow STYLE_GUIDE.md. Reuse MenuStyle and UiText.
+Keep player/character names and user chat untranslated. Translate custom HUD labels before measuring their width.
+Update all six catalogs in src/main/resources/i18n/ whenever adding or changing UI/content phrases.
+Use tools/translation-glossary.json for reviewed terminology; tools/update-translations.py --check verifies coverage without network or extra libraries.
+The --refresh workflow uses offline translation models in a separate tooling cache; these models and Python must not become server runtime dependencies.
+Review generated wording and preserve meaningful errors/dialogue while avoiding routine combat/gathering chat or action-bar spam.
+Run the translation coverage tests and the resource-pack checks when their assets change. Do not claim in-client visual acceptance or large-player-count certification from unit tests alone.
+
+# 17. Current product readiness and polishing state
+
+Use PRODUCT_READINESS.md as the designated current roadmap-state and polishing file, as requested by the owner.
+At task start, read its summary and the row/card relevant to the selected item, then verify that item against README.md and the actual code.
+README.md remains the requirements source; current code and verified checks determine implementation status.
+PRODUCT_READINESS.md distinguishes playable mechanics, foundations, missing gameplay/content, polishing and release acceptance. Do not treat a formula, database table or passing unit test as completion of the full player experience.
+After implementation or polishing, update only the affected state rows/card, evidence, remaining work and next candidate. Keep historical details in AUDIT_STATE.md rather than duplicating a new state report each turn.
+If README or an owner instruction changes, reconcile the affected state, preserve approved local changes and do not reintroduce cancelled mechanics from the remote historical version.
+Continue to implement exactly one roadmap item or one targeted polishing issue per task and stop after verification.
